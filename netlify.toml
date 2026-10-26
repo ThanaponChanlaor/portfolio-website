@@ -1,0 +1,4 @@
+# Deploys come only from GitHub Actions (.github/workflows/deploy.yml) on push to main.
+# The workflow builds the site and uploads the `build` folder with the Netlify CLI.
+[build]
+  publish = "build"
