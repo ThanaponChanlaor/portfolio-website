@@ -47,7 +47,8 @@ export function Hero() {
             '-=0.2',
           )
           .from('[data-hero-fade]', { y: 24, autoAlpha: 0, duration: 0.6, stagger: 0.12 }, '-=0.3')
-          .from('[data-hero-map]', { scale: 0.85, autoAlpha: 0, duration: 0.9, ease: 'back.out(1.4)' }, 0.2);
+          // No scale: the infinite bob keeps the map's raster layer, so scaling would freeze it blurry.
+          .from('[data-hero-map]', { y: 24, autoAlpha: 0, duration: 0.9 }, 0.2);
 
         // Idle loops.
         gsap.to('[data-hero-map]', { y: -12, duration: 3, repeat: -1, yoyo: true, ease: 'sine.inOut' });
@@ -69,7 +70,7 @@ export function Hero() {
         <span key={position} data-cloud aria-hidden="true" className={`absolute rounded-full bg-white/80 ${position}`} />
       ))}
 
-      <div className="container relative grid items-center gap-12 lg:grid-cols-2">
+      <div className="container relative grid items-center gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] xl:gap-8">
         <div>
           <span data-hero-badge className="inline-block">
             <Badge className="px-3 py-1 text-xs">{profile.applyingFor}</Badge>
