@@ -13,7 +13,7 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     title: 'DevOps',
-    skills: ['Docker', 'Git', 'Amazon EC2', 'Azure Virtual Machines', 'Ubuntu'],
+    skills: ['Docker', 'Git', 'Azure DevOps', 'Amazon EC2', 'Azure Virtual Machines', 'Ubuntu'],
     tone: 'mint',
   },
   {
