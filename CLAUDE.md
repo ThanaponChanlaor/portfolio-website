@@ -12,15 +12,25 @@ One-page portfolio for Thanapon Chanla-or: Create React App + TypeScript, styled
 
 ## Git workflow (strict)
 - Branches: `main` = production, `dev` = integration (default branch), `feature/<short-desc>` = all work.
-- Flow: `feature/*` → PR into `dev` → PR `dev` into `main`. The `source-branch` check rejects anything else.
-- `main` and `dev` are protected: no direct pushes (admins included), PRs need the `build` and `source-branch` checks to pass, and the branch must be up to date.
+- Flow: `feature/*` → PR into `dev` → PR `dev` into `main` (plus `main` → `dev` as the back-merge fallback). The `source-branch` check rejects anything else.
+- `main` and `dev` are protected: PRs need the `build` and `source-branch` checks to pass, and the branch must be up to date. `main`: no direct pushes, admins included. `dev`: only admins may bypass (for the owner's back-merge push); everyone else needs a PR.
 - **The repo owner merges every PR.** Claude must never push to, merge into, or force-push `main` or `dev`, never enable auto-merge, and never bypass hooks or checks.
 - To make a change, Claude:
   1. `git checkout dev && git pull && git checkout -b feature/<short-desc>`
   2. makes the change, then runs Test/Build above locally
-  3. commits (imperative subject ≤ 72 chars, body explains why), pushes, and runs `gh pr create --base dev` using `.github/pull_request_template.md`
-  4. waits for `gh pr checks --watch` and gives the owner the PR link
-  5. offers a `dev → main` release PR after the owner has merged into `dev`
+  3. commits (imperative subject ≤ 72 chars, body explains why)
+  4. syncs: `git fetch && git merge origin/dev`, resolves conflicts locally, re-runs Test/Build
+  5. pushes and runs `gh pr create --base dev` using `.github/pull_request_template.md`
+  6. waits for `gh pr checks --watch` and gives the owner the PR link
+  7. offers a `dev → main` release PR after the owner has merged into `dev`
+
+## Back-merge after release
+The owner does this (Claude never pushes `dev`). Merging a `dev → main` PR adds a merge commit `dev` lacks, and `strict` checks block the next release PR until `dev` contains it.
+1. `git checkout dev && git pull && git fetch && git merge origin/main`, resolve conflicts locally
+2. `git push` — it shows "Bypassed rule violations"; that is expected.
+3. Check `git diff origin/main origin/dev` prints nothing (same files; commit counts always differ by merge commits).
+
+Fallback if the direct push is blocked: push the merged state to `feature/sync-main`, PR it into `dev`, then `git reset --hard origin/dev` locally.
 
 ## Deployment
 - Deploys run only from GitHub Actions on push to `main`, i.e. when a `dev → main` PR is merged (`.github/workflows/deploy.yml`). There are no manual or local deploys.
