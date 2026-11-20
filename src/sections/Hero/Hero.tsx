@@ -47,19 +47,10 @@ export function Hero() {
             '-=0.2',
           )
           .from('[data-hero-fade]', { y: 24, autoAlpha: 0, duration: 0.6, stagger: 0.12 }, '-=0.3')
-          .from('[data-hero-map]', { scale: 0.85, autoAlpha: 0, duration: 0.9, ease: 'back.out(1.4)' }, 0.2)
-          .from('[data-pin]', { scale: 0, autoAlpha: 0, duration: 0.4, stagger: 0.06, ease: 'back.out(3)' }, '-=0.4');
+          .from('[data-hero-map]', { scale: 0.85, autoAlpha: 0, duration: 0.9, ease: 'back.out(1.4)' }, 0.2);
 
         // Idle loops.
         gsap.to('[data-hero-map]', { y: -12, duration: 3, repeat: -1, yoyo: true, ease: 'sine.inOut' });
-        gsap.to('[data-pin]', {
-          y: -5,
-          duration: 1.2,
-          repeat: -1,
-          yoyo: true,
-          ease: 'sine.inOut',
-          stagger: { each: 0.15, from: 'random' },
-        });
         gsap.to('[data-cloud]', {
           x: () => gsap.utils.random(20, 60),
           duration: () => gsap.utils.random(6, 10),
