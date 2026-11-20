@@ -52,7 +52,7 @@ export function Hero() {
           .from('[data-pin]', { scale: 0, autoAlpha: 0, duration: 0.4, stagger: 0.06, ease: 'back.out(3)' }, '-=0.4');
 
         // Idle loops.
-        gsap.to('[data-hero-map]', { y: -12, duration: 3, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+        gsap.to('[data-hero-map]', { y: -5, duration: 4, repeat: -1, yoyo: true, ease: 'sine.inOut' });
         gsap.to('[data-pin]', {
           y: -5,
           duration: 1.2,
