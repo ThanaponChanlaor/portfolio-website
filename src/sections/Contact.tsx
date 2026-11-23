@@ -77,9 +77,6 @@ export function Contact() {
             <br />
             the next one.
           </h2>
-          {/* <p className="mt-6 text-sm">
-            Based in {profile.location}. Messages go to the Go API and land in PostgreSQL.
-          </p> */}
           <a href={`mailto:${profile.email}`} className="mt-4 block font-semibold underline">
             {profile.email}
           </a>
