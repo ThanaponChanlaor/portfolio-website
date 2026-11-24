@@ -4,7 +4,7 @@ export const profile: Profile = {
   initials: 'TC',
   firstName: 'Thanapon',
   lastName: 'Chanla-or',
-  applyingFor: 'Open to Mid to Senior Developer and Product Owner roles',
+  applyingFor: 'Open to Senior Developer and Product Owner roles',
   intro:
     'Tech Lead and Software Developer with 3+ years building web platforms for government, healthcare and financial clients, from presale through go-live. I develop with React.js, TypeScript and CMS platforms, review code and guide developers, and step into Product Owner and BA roles when projects need it, often on at-risk projects, renegotiating scope and bringing them back to a positive margin.',
   location: 'Nong Chok, Bangkok',
